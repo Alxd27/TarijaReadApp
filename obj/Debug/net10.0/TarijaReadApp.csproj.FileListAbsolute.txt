@@ -185,3 +185,4 @@ C:\Users\Usuario\Desktop\PrograWebgod\TarijaReadApp\obj\Debug\net10.0\refint\Tar
 C:\Users\Usuario\Desktop\PrograWebgod\TarijaReadApp\obj\Debug\net10.0\TarijaReadApp.pdb
 C:\Users\Usuario\Desktop\PrograWebgod\TarijaReadApp\obj\Debug\net10.0\TarijaReadApp.genruntimeconfig.cache
 C:\Users\Usuario\Desktop\PrograWebgod\TarijaReadApp\obj\Debug\net10.0\ref\TarijaReadApp.dll
+C:\Users\Usuario\Desktop\PrograWebgod\TarijaReadApp\obj\Debug\net10.0\TarijaReadApp.sourcelink.json

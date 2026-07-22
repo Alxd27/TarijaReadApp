@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using TarijaReadApp.Data;
+using TarijaReadApp.Interfaces;
+using TarijaReadApp.Repositories;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +11,12 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<ILibroRepository, LibroRepository>();
+builder.Services.AddScoped<IEjemplarRepository, EjemplarRepository>();
+builder.Services.AddScoped<IPrestamoRepository, PrestamoRepository>();
+builder.Services.AddScoped<IMultaRepository, MultaRepository>();
 
 var app = builder.Build();
 

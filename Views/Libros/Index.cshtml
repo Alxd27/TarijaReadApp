@@ -1,0 +1,38 @@
+@model IEnumerable<TarijaReadApp.Models.Libro>
+
+@{
+    ViewData["Title"] = "Libros";
+}
+
+<h1>Libros</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nuevo Libro</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>ISBN</th>
+            <th>Categoría</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Titulo</td>
+            <td>@item.Autor</td>
+            <td>@item.ISBN</td>
+            <td>@item.Categoria?.Nombre</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+            </td>
+        </tr>
+    }
+</tbody>
+</table>
