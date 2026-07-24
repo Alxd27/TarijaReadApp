@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace TarijaReadApp.Models;
 
@@ -18,7 +19,9 @@ public class Libro
 
     public int CategoriaId {get; set;}
 
+    [ValidateNever]
     public virtual Categoria Categoria {get; set;} = null!;
 
+    [ValidateNever]
     public virtual ICollection<Ejemplar> Ejemplares {get; set;} = new HashSet<Ejemplar>();
 }

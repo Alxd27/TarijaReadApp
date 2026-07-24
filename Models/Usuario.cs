@@ -1,5 +1,6 @@
 // Models/Usuario.cs
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace TarijaReadApp.Models;
 
@@ -18,6 +19,7 @@ public class Usuario
 
     [Required]
     public RolUsuario Rol { get; set; } = RolUsuario.OperadorDeAtencion;
-
+    
+    [ValidateNever]
     public virtual ICollection<Prestamo> Prestamos { get; set; } = new HashSet<Prestamo>();
 }

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace TarijaReadApp.Models;
 
@@ -18,5 +19,6 @@ public class Socio
     [StringLength(20)]
     public string? Telefono {get; set;}
 
+    [ValidateNever]
     public virtual ICollection<Prestamo> Prestamos {get; set;} = new HashSet<Prestamo>();
 }

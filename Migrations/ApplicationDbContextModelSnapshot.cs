@@ -136,13 +136,13 @@ namespace TarijaReadApp.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("FechaDevolucion")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("FechaLimite")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("FechaSalida")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("SocioId")
                         .HasColumnType("integer");

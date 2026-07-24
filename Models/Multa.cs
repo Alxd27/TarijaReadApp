@@ -1,5 +1,6 @@
 // Models/Multa.cs
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace TarijaReadApp.Models;
 
@@ -15,5 +16,7 @@ public class Multa
 
     // FK 1:1 con Prestamo
     public int PrestamoId { get; set; }
+
+    [ValidateNever]
     public virtual Prestamo Prestamo { get; set; } = null!;
 }
