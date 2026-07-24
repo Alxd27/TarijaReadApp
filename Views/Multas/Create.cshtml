@@ -1,4 +1,4 @@
-@model TarijaReadApp.Models.Multa
+@model TarijaReadApp.ViewModels.MultaCreateViewModel
 
 @{ ViewData["Title"] = "Nueva Multa"; }
 
@@ -35,3 +35,7 @@
         </div>
     </form>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

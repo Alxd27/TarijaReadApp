@@ -1,5 +1,17 @@
-﻿@{
+﻿@using TarijaReadApp.ViewModels
+@{
     ViewData["Title"] = "TarijaRead - Panel Principal";
+
+    var modulos = new List<ModuloCardViewModel>
+    {
+        new() { Titulo = "Categorías", Descripcion = "Gestiona las categorías de libros", Controller = "Categorias" },
+        new() { Titulo = "Libros", Descripcion = "Catálogo de libros registrados", Controller = "Libros" },
+        new() { Titulo = "Ejemplares", Descripcion = "Copias físicas de cada libro", Controller = "Ejemplares" },
+        new() { Titulo = "Socios", Descripcion = "Usuarios que solicitan préstamos", Controller = "Socios" },
+        new() { Titulo = "Préstamos", Descripcion = "Registro de salidas y devoluciones", Controller = "Prestamos" },
+        new() { Titulo = "Multas", Descripcion = "Penalizaciones por mora", Controller = "Multas" },
+        new() { Titulo = "Usuarios", Descripcion = "Personal administrativo y bibliotecarios", Controller = "Usuarios" }
+    };
 }
 
 <div class="container mt-5">
@@ -9,74 +21,9 @@
     </div>
 
     <div class="row g-4">
-        <div class="col-md-4 col-sm-6">
-            <div class="card shadow-sm h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Categorías</h5>
-                    <p class="card-text text-muted">Gestiona las categorías de libros</p>
-                    <a asp-controller="Categorias" asp-action="Index" class="btn btn-primary w-100">Ir a Categorías</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6">
-            <div class="card shadow-sm h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Libros</h5>
-                    <p class="card-text text-muted">Catálogo de libros registrados</p>
-                    <a asp-controller="Libros" asp-action="Index" class="btn btn-primary w-100">Ir a Libros</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6">
-            <div class="card shadow-sm h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Ejemplares</h5>
-                    <p class="card-text text-muted">Copias físicas de cada libro</p>
-                    <a asp-controller="Ejemplares" asp-action="Index" class="btn btn-primary w-100">Ir a Ejemplares</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6">
-            <div class="card shadow-sm h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Socios</h5>
-                    <p class="card-text text-muted">Usuarios que solicitan préstamos</p>
-                    <a asp-controller="Socios" asp-action="Index" class="btn btn-primary w-100">Ir a Socios</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6">
-            <div class="card shadow-sm h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Préstamos</h5>
-                    <p class="card-text text-muted">Registro de salidas y devoluciones</p>
-                    <a asp-controller="Prestamos" asp-action="Index" class="btn btn-primary w-100">Ir a Préstamos</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6">
-            <div class="card shadow-sm h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Multas</h5>
-                    <p class="card-text text-muted">Penalizaciones por mora</p>
-                    <a asp-controller="Multas" asp-action="Index" class="btn btn-primary w-100">Ir a Multas</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 col-sm-6">
-            <div class="card shadow-sm h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Usuarios</h5>
-                    <p class="card-text text-muted">Personal administrativo y bibliotecarios</p>
-                    <a asp-controller="Usuarios" asp-action="Index" class="btn btn-primary w-100">Ir a Usuarios</a>
-                </div>
-            </div>
-        </div>
+        @foreach (var modulo in modulos)
+        {
+            <partial name="_ModuloCard" model="modulo" />
+        }
     </div>
 </div>

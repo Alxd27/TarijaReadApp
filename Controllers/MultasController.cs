@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TarijaReadApp.Interfaces;
 using TarijaReadApp.Models;
+using TarijaReadApp.ViewModels;
 
 namespace TarijaReadApp.Controllers;
 
@@ -18,26 +19,35 @@ public class MultasController : Controller
 
     public async Task<IActionResult> Index() => View(await _repository.GetAllAsync());
 
-    public async Task<IActionResult> Create()
+   public async Task<IActionResult> Create()
+{
+    await CargarPrestamos();
+    return View();
+}
+
+// POST: Multas/Create
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Create(MultaCreateViewModel vm)
+{
+    if (!ModelState.IsValid)
     {
-        await CargarPrestamos();
-        return View();
+        await CargarPrestamos(vm.PrestamoId);
+        return View(vm);
     }
 
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(Multa multa)
+    // Mapeo manual: del ViewModel (lo que el usuario llenó) a la Entidad real
+    var nuevaMulta = new Multa
     {
-        if (!ModelState.IsValid)
-        {
-            await CargarPrestamos(multa.PrestamoId);
-            return View(multa);
-        }
+        PrestamoId = vm.PrestamoId,
+        Monto = vm.Monto,
+        PagoRealizado = vm.PagoRealizado
+    };
 
-        await _repository.AddAsync(multa);
-        await _repository.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
-    }
+    await _repository.AddAsync(nuevaMulta);
+    await _repository.SaveChangesAsync();
+    return RedirectToAction(nameof(Index));
+}
 
     public async Task<IActionResult> Edit(int id)
     {
