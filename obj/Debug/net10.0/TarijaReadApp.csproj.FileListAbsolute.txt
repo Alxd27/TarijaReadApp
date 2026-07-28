@@ -251,3 +251,7 @@ C:\Users\Usuario\Desktop\PrograWebgod\TarijaReadApp\obj\Debug\net10.0\compressed
 C:\Users\Usuario\Desktop\PrograWebgod\TarijaReadApp\obj\Debug\net10.0\compressed\nezrqnk58p-{0}-muycvpuwrr-muycvpuwrr.gz
 C:\Users\Usuario\Desktop\PrograWebgod\TarijaReadApp\obj\Debug\net10.0\compressed\v0zgfp0y55-{0}-87fc7y1x7t-87fc7y1x7t.gz
 C:\Users\Usuario\Desktop\PrograWebgod\TarijaReadApp\obj\Debug\net10.0\compressed\yfc7ypekbg-{0}-mlv21k5csn-mlv21k5csn.gz
+C:\Users\Usuario\Desktop\PrograWebgod\TarijaReadApp\bin\Debug\net10.0\Microsoft.OpenApi.dll
+C:\Users\Usuario\Desktop\PrograWebgod\TarijaReadApp\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Usuario\Desktop\PrograWebgod\TarijaReadApp\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Usuario\Desktop\PrograWebgod\TarijaReadApp\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll

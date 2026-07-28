@@ -8,6 +8,12 @@
         <a asp-action="Create" class="btn btn-primary">+ Nuevo Libro</a>
     </div>
 
+    <div class="mb-3">
+        <button id="btnCargar" class="btn btn-info">Cargar Inventario vía AJAX</button>
+    </div>
+
+    <div id="listaLibros" class="mt-3"></div>
+
     <div class="table-responsive">
         <table class="table table-striped shadow-sm">
             <thead class="table-dark">
@@ -37,3 +43,30 @@
         </table>
     </div>
 </div>
+
+@section Scripts {
+<script>
+    document.getElementById("btnCargar").addEventListener("click", async () => {
+        const contenedor = document.getElementById("listaLibros");
+        contenedor.innerHTML = '<div class="spinner-border text-primary"></div>';
+
+        try {
+            const respuesta = await fetch("/api/LibrosApi");
+            if (!respuesta.ok) throw new Error("Error en la red");
+
+            const datos = await respuesta.json();
+
+            contenedor.innerHTML = "";
+            datos.forEach(l => {
+                contenedor.innerHTML += `
+                    <div class="alert alert-secondary">
+                        <strong>${l.titulo}</strong> — ${l.autor}
+                        <br><small>Categoría: ${l.categoria} ${l.isbn ? '| ISBN: ' + l.isbn : ''}</small>
+                    </div>`;
+            });
+        } catch (error) {
+            contenedor.innerHTML = `<p class="text-danger">Error: ${error.message}</p>`;
+        }
+    });
+</script>
+}

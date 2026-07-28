@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TarijaReadApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a99d4ccc7a05e1942d03d6f51943b51d9615a18a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c36b26d32ae52cf88635e1a9ce483655360f2f3")]
 [assembly: System.Reflection.AssemblyProductAttribute("TarijaReadApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TarijaReadApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
