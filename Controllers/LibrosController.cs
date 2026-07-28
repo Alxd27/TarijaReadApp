@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TarijaReadApp.Interfaces;
 using TarijaReadApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TarijaReadApp.Controllers;
 
+[Authorize]
 public class LibrosController : Controller
 {
     private readonly ILibroRepository _repository;
@@ -70,6 +72,7 @@ public class LibrosController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+     [Authorize(Roles = "Admin")] 
     public async Task<IActionResult> Delete(int id)
     {
         var libro = await _repository.GetByIdAsync(id);
@@ -79,6 +82,7 @@ public class LibrosController : Controller
 
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var libro = await _repository.GetByIdAsync(id);

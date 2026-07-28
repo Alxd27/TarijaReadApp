@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("TarijaReadApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+889aa047f942fc0c273256f0eb590ed3ba773238")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a99d4ccc7a05e1942d03d6f51943b51d9615a18a")]
 [assembly: System.Reflection.AssemblyProductAttribute("TarijaReadApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TarijaReadApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,10 +1,11 @@
-// Data/ApplicationDbContext.cs
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TarijaReadApp.Models;
 
 namespace TarijaReadApp.Data;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -21,16 +22,14 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
+        base.OnModelCreating(modelBuilder); 
 
-        // Relación 1:1 Prestamo-Multa (evita ciclo de eliminación en cascada)
         modelBuilder.Entity<Multa>()
             .HasOne(m => m.Prestamo)
             .WithOne(p => p.Multa)
             .HasForeignKey<Multa>(m => m.PrestamoId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // Evitar cascada múltiple en Prestamo (Ejemplar y Socio)
         modelBuilder.Entity<Prestamo>()
             .HasOne(p => p.Ejemplar)
             .WithMany(e => e.Prestamos)
@@ -49,7 +48,6 @@ public class ApplicationDbContext : DbContext
             .HasForeignKey(p => p.UsuarioId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        // Precisión decimal para dinero (ODS 8)
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
             var properties = entityType.GetProperties()
