@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using TarijaReadApp.Interfaces;
 using TarijaReadApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TarijaReadApp.Controllers;
 
+[Authorize]
 public class SociosController : Controller
 {
     private readonly IRepository<Socio> _repository;
@@ -15,10 +17,12 @@ public class SociosController : Controller
 
     public async Task<IActionResult> Index() => View(await _repository.GetAllAsync());
 
+    [Authorize(Roles = "Admin")]
     public IActionResult Create() => View();
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create(Socio socio)
     {
         if (!ModelState.IsValid) return View(socio);
@@ -27,6 +31,7 @@ public class SociosController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int id)
     {
         var socio = await _repository.GetByIdAsync(id);
@@ -36,6 +41,7 @@ public class SociosController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int id, Socio socio)
     {
         if (id != socio.Id) return NotFound();
@@ -45,6 +51,7 @@ public class SociosController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
         var socio = await _repository.GetByIdAsync(id);
@@ -54,6 +61,7 @@ public class SociosController : Controller
 
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var socio = await _repository.GetByIdAsync(id);

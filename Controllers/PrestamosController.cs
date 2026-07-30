@@ -2,8 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TarijaReadApp.Interfaces;
 using TarijaReadApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TarijaReadApp.Controllers;
+
+[Authorize]
 
 public class PrestamosController : Controller
 {
@@ -26,6 +29,7 @@ public class PrestamosController : Controller
 
     public async Task<IActionResult> Index() => View(await _repository.GetAllAsync());
 
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create()
     {
         await CargarListas();
@@ -34,6 +38,7 @@ public class PrestamosController : Controller
 
     [HttpPost]
 [ValidateAntiForgeryToken]
+[Authorize(Roles = "Admin")]
 public async Task<IActionResult> Create(Prestamo prestamo)
 {
     if (!ModelState.IsValid)
@@ -55,6 +60,7 @@ public async Task<IActionResult> Create(Prestamo prestamo)
     return RedirectToAction(nameof(Index));
 }
 
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int id)
     {
         var prestamo = await _repository.GetByIdAsync(id);
@@ -65,6 +71,7 @@ public async Task<IActionResult> Create(Prestamo prestamo)
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int id, Prestamo prestamo)
     {
         if (id != prestamo.Id) return NotFound();
@@ -79,6 +86,7 @@ public async Task<IActionResult> Create(Prestamo prestamo)
         return RedirectToAction(nameof(Index));
     }
 
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
         var prestamo = await _repository.GetByIdAsync(id);
@@ -88,6 +96,7 @@ public async Task<IActionResult> Create(Prestamo prestamo)
 
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var prestamo = await _repository.GetByIdAsync(id);

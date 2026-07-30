@@ -2,8 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TarijaReadApp.Interfaces;
 using TarijaReadApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TarijaReadApp.Controllers;
+
+[Authorize]
 
 public class EjemplaresController : Controller
 {
@@ -18,6 +21,8 @@ public class EjemplaresController : Controller
 
     public async Task<IActionResult> Index() => View(await _repository.GetAllAsync());
 
+
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create()
     {
         await CargarLibros();
@@ -26,6 +31,7 @@ public class EjemplaresController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create(Ejemplar ejemplar)
     {
         if (!ModelState.IsValid)
@@ -39,6 +45,7 @@ public class EjemplaresController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int id)
     {
         var ejemplar = await _repository.GetByIdAsync(id);
@@ -49,6 +56,7 @@ public class EjemplaresController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int id, Ejemplar ejemplar)
     {
         if (id != ejemplar.Id) return NotFound();
@@ -63,6 +71,7 @@ public class EjemplaresController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
         var ejemplar = await _repository.GetByIdAsync(id);
@@ -72,6 +81,7 @@ public class EjemplaresController : Controller
 
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var ejemplar = await _repository.GetByIdAsync(id);

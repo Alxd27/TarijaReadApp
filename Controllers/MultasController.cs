@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using TarijaReadApp.Interfaces;
 using TarijaReadApp.Models;
 using TarijaReadApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TarijaReadApp.Controllers;
+
+[Authorize]
 
 public class MultasController : Controller
 {
@@ -19,6 +22,7 @@ public class MultasController : Controller
 
     public async Task<IActionResult> Index() => View(await _repository.GetAllAsync());
 
+    [Authorize(Roles = "Admin")]
    public async Task<IActionResult> Create()
 {
     await CargarPrestamos();
@@ -28,6 +32,7 @@ public class MultasController : Controller
 // POST: Multas/Create
 [HttpPost]
 [ValidateAntiForgeryToken]
+[Authorize(Roles = "Admin")]
 public async Task<IActionResult> Create(MultaCreateViewModel vm)
 {
     if (!ModelState.IsValid)
@@ -49,6 +54,7 @@ public async Task<IActionResult> Create(MultaCreateViewModel vm)
     return RedirectToAction(nameof(Index));
 }
 
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int id)
     {
         var multa = await _repository.GetByIdAsync(id);
@@ -59,6 +65,7 @@ public async Task<IActionResult> Create(MultaCreateViewModel vm)
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int id, Multa multa)
     {
         if (id != multa.Id) return NotFound();
@@ -73,6 +80,7 @@ public async Task<IActionResult> Create(MultaCreateViewModel vm)
         return RedirectToAction(nameof(Index));
     }
 
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
         var multa = await _repository.GetByIdAsync(id);
@@ -82,6 +90,7 @@ public async Task<IActionResult> Create(MultaCreateViewModel vm)
 
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var multa = await _repository.GetByIdAsync(id);

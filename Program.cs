@@ -3,7 +3,9 @@ using TarijaReadApp.Data;
 using TarijaReadApp.Interfaces;
 using TarijaReadApp.Repositories;
 using Microsoft.AspNetCore.Identity;
+using TarijaReadApp.Services;
 
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +36,7 @@ builder.Services.AddScoped<ILibroRepository, LibroRepository>();
 builder.Services.AddScoped<IEjemplarRepository, EjemplarRepository>();
 builder.Services.AddScoped<IPrestamoRepository, PrestamoRepository>();
 builder.Services.AddScoped<IMultaRepository, MultaRepository>();
+builder.Services.AddScoped<ReportService>();
 
 var app = builder.Build();
 

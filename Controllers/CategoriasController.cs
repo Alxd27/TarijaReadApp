@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using TarijaReadApp.Interfaces;
 using TarijaReadApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TarijaReadApp.Controllers;
 
+[Authorize]
 public class CategoriasController : Controller
 {
     private readonly IRepository<Categoria> _repository;
@@ -21,6 +23,7 @@ public class CategoriasController : Controller
     }
 
     // GET: Categorias/Create
+    [Authorize(Roles = "Admin")]
     public IActionResult Create()
     {
         return View();
@@ -29,6 +32,7 @@ public class CategoriasController : Controller
     // POST: Categorias/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create(Categoria categoria)
     {
         if (!ModelState.IsValid)
@@ -40,6 +44,7 @@ public class CategoriasController : Controller
     }
 
     // GET: Categorias/Edit/5
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int id)
     {
         var categoria = await _repository.GetByIdAsync(id);
@@ -50,6 +55,7 @@ public class CategoriasController : Controller
     // POST: Categorias/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int id, Categoria categoria)
     {
         if (id != categoria.Id) return NotFound();
@@ -61,6 +67,7 @@ public class CategoriasController : Controller
     }
 
     // GET: Categorias/Delete/5
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Delete(int id)
     {
         var categoria = await _repository.GetByIdAsync(id);
@@ -71,6 +78,7 @@ public class CategoriasController : Controller
     // POST: Categorias/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var categoria = await _repository.GetByIdAsync(id);

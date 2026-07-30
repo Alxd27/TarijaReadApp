@@ -24,6 +24,7 @@ public class LibrosController : Controller
         return View(libros);
     }
 
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create()
     {
         await CargarCategorias();
@@ -32,6 +33,7 @@ public class LibrosController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create(Libro libro)
     {
         if (!ModelState.IsValid)
@@ -48,6 +50,7 @@ public class LibrosController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int id)
     {
         var libro = await _repository.GetByIdAsync(id);
@@ -58,6 +61,7 @@ public class LibrosController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Edit(int id, Libro libro)
     {
         if (id != libro.Id) return NotFound();
